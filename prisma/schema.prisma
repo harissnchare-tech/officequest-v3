@@ -1,0 +1,75 @@
+// HARISS OfficeQuest V3 — Schéma Prisma
+// Base de données : PostgreSQL
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum Role {
+  ADMIN
+  EMPLOYEE
+}
+
+enum QuestStatus {
+  OPEN
+  CLOSED
+}
+
+enum QuestDifficulty {
+  EASY
+  MEDIUM
+  HARD
+  EPIC
+}
+
+model User {
+  id          Int          @id @default(autoincrement())
+  name        String
+  email       String       @unique
+  password    String
+  role        Role         @default(EMPLOYEE)
+  xp          Int          @default(0)
+  level       Int          @default(1)
+  avatar      String?
+  createdAt   DateTime     @default(now())
+  updatedAt   DateTime     @updatedAt
+
+  questsCreated Quest[]      @relation("QuestCreator")
+  completions   Completion[]
+
+  @@map("users")
+}
+
+model Quest {
+  id          Int             @id @default(autoincrement())
+  title       String
+  description String?
+  xpReward    Int             @default(10)
+  difficulty  QuestDifficulty @default(EASY)
+  status      QuestStatus     @default(OPEN)
+  createdBy   Int?
+  creator     User?           @relation("QuestCreator", fields: [createdBy], references: [id])
+  createdAt   DateTime        @default(now())
+  updatedAt   DateTime        @updatedAt
+
+  completions Completion[]
+
+  @@map("quests")
+}
+
+model Completion {
+  id          Int      @id @default(autoincrement())
+  userId      Int
+  questId     Int
+  user        User     @relation(fields: [userId], references: [id])
+  quest       Quest    @relation(fields: [questId], references: [id])
+  completedAt DateTime @default(now())
+
+  @@unique([userId, questId])
+  @@map("completions")
+}

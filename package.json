@@ -1,0 +1,41 @@
+{
+  "name": "hariss-officequest-v3",
+  "version": "3.0.0",
+  "description": "HARISS OfficeQuest V3 - Plateforme de gamification pour la gestion de tâches en entreprise (quêtes, XP, niveaux, classement)",
+  "main": "src/server.js",
+  "scripts": {
+    "start": "node src/server.js",
+    "dev": "nodemon src/server.js",
+    "prisma:generate": "prisma generate",
+    "prisma:migrate": "prisma migrate dev",
+    "prisma:deploy": "prisma migrate deploy",
+    "prisma:studio": "prisma studio",
+    "postinstall": "prisma generate"
+  },
+  "keywords": [
+    "officequest",
+    "gamification",
+    "express",
+    "prisma",
+    "postgresql"
+  ],
+  "author": "HARISS",
+  "license": "MIT",
+  "dependencies": {
+    "@prisma/client": "^5.20.0",
+    "bcryptjs": "^2.4.3",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "jsonwebtoken": "^9.0.2",
+    "morgan": "^1.10.0",
+    "multer": "^1.4.5-lts.1"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.4",
+    "prisma": "^5.20.0"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}

@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tableau de bord — HARISS OfficeQuest V3</title>
+  <link rel="stylesheet" href="/css/style.css" />
+</head>
+<body>
+  <header class="topbar">
+    <h1>🏆 HARISS <span>OfficeQuest</span></h1>
+    <div class="user-box">
+      <div id="user-avatar" class="avatar-circle">?</div>
+      <div class="user-info">
+        <strong id="user-name">Chargement...</strong>
+        <span id="user-level">Niveau —</span>
+      </div>
+      <button id="logout-btn" class="btn-ghost">Déconnexion</button>
+    </div>
+  </header>
+
+  <section class="progress-section">
+    <div class="progress-bar-wrapper">
+      <div id="xp-progress-bar" class="progress-bar-fill" style="width: 0%"></div>
+    </div>
+    <p id="xp-text">0 / 0 XP</p>
+  </section>
+
+  <main class="dashboard-grid">
+    <section class="panel" id="quests-panel">
+      <div class="panel-header">
+        <h2>📋 Quêtes disponibles</h2>
+        <button id="new-quest-btn" class="btn-primary btn-small hidden">+ Nouvelle quête</button>
+      </div>
+      <div id="quest-list" class="quest-list">
+        <p class="loading">Chargement des quêtes...</p>
+      </div>
+    </section>
+
+    <section class="panel" id="leaderboard-panel">
+      <div class="panel-header">
+        <h2>🥇 Classement</h2>
+      </div>
+      <ol id="leaderboard-list" class="leaderboard-list">
+        <li class="loading">Chargement du classement...</li>
+      </ol>
+    </section>
+  </main>
+
+  <!-- Modale de création de quête (admin) -->
+  <div id="quest-modal" class="modal hidden">
+    <div class="modal-content">
+      <h3>Créer une nouvelle quête</h3>
+      <form id="quest-form">
+        <label for="quest-title">Titre</label>
+        <input type="text" id="quest-title" required />
+
+        <label for="quest-description">Description</label>
+        <textarea id="quest-description" rows="3"></textarea>
+
+        <label for="quest-xp">Récompense XP</label>
+        <input type="number" id="quest-xp" value="10" min="1" required />
+
+        <label for="quest-difficulty">Difficulté</label>
+        <select id="quest-difficulty">
+          <option value="EASY">Facile</option>
+          <option value="MEDIUM">Moyen</option>
+          <option value="HARD">Difficile</option>
+          <option value="EPIC">Épique</option>
+        </select>
+
+        <div class="modal-actions">
+          <button type="button" id="quest-cancel-btn" class="btn-ghost">Annuler</button>
+          <button type="submit" class="btn-primary">Créer</button>
+        </div>
+        <p class="form-message" id="quest-form-message"></p>
+      </form>
+    </div>
+  </div>
+
+  <script src="/js/dashboard.js"></script>
+</body>
+</html>
